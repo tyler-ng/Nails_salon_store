@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Tanning Services{% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+    <div class="container">
+        <h1 class="page-title">Services</h1>
+    </div>
+</section>
+<section class="breadcrumbs-custom">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li class="active">Tanning</li>
+        </ul>
+    </div>
+</section>
+<section class="section section-lg bg-gray-100 text-center">
+	<div class="container">
+    <h2>Tanning Services</h2>
+    <div class="divider-lg"></div>
+    <div class="card" id="two-column-card">
+        <div class="card-block">
+            <div class="row">
+                <div class="col-lg-5 tags p-b-2">
+                    <div class="single-card-item">
+                        {% for key, list in first_services.items %}
+                            <h3>{{ key }}</h3>
+                            {% for item in list %}
+                                <div>
+                                    <p class="big text-gray-800">{{ item.name }} <span>${{ item.price }}</span></p> 
+                                    <p class="big single-card-content">{{ item.description }}</p>
+                                    {% if item == list|first %}
+                                        {% with sub_cate_photos|first as first_item %}
+                                            <img src="{{ first_item.url }}" width="445" height="320" alt="">
+                                        {% endwith %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-2">
+                    <div class="single-card-item">
+                        {% for key, list in last_services.items %}
+                            <h3>{{ key }}</h3>
+                            {% for item in list %}
+                                <div>
+                                    <p class="big text-gray-800">{{ item.name }} <span>${{ item.price }}</span></p> 
+                                    <p class="big single-card-content">{{ item.description }}</p>
+                                    {% if forloop.last %}
+                                        {% with sub_cate_photos|last as last_item %}
+                                            <img class="service-image" src="{{ last_item.url }}" width="445" height="320" alt="service-image">
+                                        {% endwith %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div>
+        <form action="{% url 'appointments' %}" method="GET" data-form-output="form-output-global">
+            {% csrf_token %}
+            <div class="form-button group-sm text-center">
+                <button class="button button-primary" type="submit">make an appointment now</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

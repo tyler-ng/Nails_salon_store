@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Contact Us {% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+	<div class="container">
+		<h1 class="page-title">Contacts</h1>
+	</div>
+</section>
+<section class="breadcrumbs-custom">
+	<div class="container">
+		<ul class="breadcrumbs-custom-path">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li class="active">Contacts</li>
+		</ul>
+	</div>
+</section>
+<!-- Mailform-->
+<section class="section section-md">
+	{% include 'partials/_alert.html' %}
+	<div class="container">
+		<div class="row row-50">
+			<div class="col-lg-8">
+				<h2>Contact us</h2>
+				<div class="divider-lg"></div>
+				<p>You can contact us any way that is convenient for you. We are available 24/7 via fax or email. <br class="d-none d-lg-inline">You can also use a quick contact form below or visit our salon personally.</p>
+				<!-- RD Mailform-->
+				<form action="{% url 'contact' %}" method="POST" data-form-output="form-output-global" data-form-type="contact">
+					{% csrf_token %}
+					<div class="row row-15">
+						<div class="col-sm-6">
+							<div class="form-wrap">
+								<label class="form-label" for="contact-name">First name</label>
+								<input class="form-input" id="contact-name" type="text" name="first_name" required>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-wrap">
+								<label class="form-label" for="contact-sec-name">Last name</label>
+								<input class="form-input" id="contact-sec-name" type="text" name="last_name" required>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-wrap">
+								<label class="form-label" for="contact-phone">Phone</label>
+								<input class="form-input" id="contact-phone" type="text" name="phone" required>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-wrap">
+								<label class="form-label" for="contact-email">E-Mail</label>
+								<input class="form-input" id="contact-email" type="email" name="email" required>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-wrap">
+								<label class="form-label" for="contact-message">Message</label>
+								<textarea class="form-input" id="contact-message" name="message" required></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="form-button group-sm text-left">
+						<button class="button button-primary" type="submit">Send message</button>
+					</div>
+				</form>
+			</div>
+            <div class="col-lg-4">
+				{% with shopInformation|first as first_item %}
+				<ul class="contact-list">
+				  <li> 
+					<p class="contact-list-title">Address</p>
+					<div class="contact-list-content"><span class="icon mdi mdi-map-marker icon-primary"></span><a href="#">{{ first_item.address }}</a></div>
+				  </li>
+				  <li>
+					<p class="contact-list-title">Phones</p>
+					<div class="contact-list-content"><span class="icon mdi mdi-phone icon-primary"></span><a href="tel:+1 304-728-9989">{{ first_item.phone }}</a><span></span></div>
+				  </li>
+				  <li>
+					<p class="contact-list-title">E-mail</p>
+					<div class="contact-list-content"><span class="icon mdi mdi-email-outline icon-primary"></span><a href="mailto:#">{{ first_item.email }}</a></div>
+					</li>
+					<li>
+						<p class="contact-list-title">Facebook</p>
+						<div class="contact-list-content"><span class="icon mdi fa-facebook icon-primary"></span><a href="https://www.facebook.com/townsnailsspa/">Town's Nails & Spa</a></div>
+						</li>
+				  <li>
+					<p class="contact-list-title">Opening Hours</p>
+					<div class="contact-list-content"><span class="icon mdi mdi-clock icon-primary"></span>
+					  <ul class="list-xs">
+						<li>Mon-Fri: {{ first_item.open_hour_in_week_from }} – {{ first_item.open_hour_in_week_to }}</li>
+						<li>Saturday: {{ first_item.open_hour_in_saturday_from }} – {{ first_item.open_hour_in_saturday_to }}</li>
+						<li>Sunday: {{ first_item.open_hour_in_sunday_from }} – {{ first_item.open_hour_in_sunday_to }}</li>
+					  </ul>
+					</div>
+				  </li>
+				</ul>
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Welcome{% endblock %}
+
+{% block content %}
+<section>
+	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			{% for slider in sliders %}
+			<div class="carousel-item
+				{% with sliders|first as first %}
+					{% if slider.photo.url == first.photo.url %}
+						active
+					{% endif %}
+				{% endwith %}">
+				<img src="{{ slider.photo.url }}" class="d-block w-100" alt="...">
+				<div class="carousel-caption d-md-block">
+					<div class="text-box">
+						<h1 class="heading-primary">
+							<span class="heading-primary-main">Lorem Ipsum is simply dummy text</span>
+						</h1>
+
+						<a href="#book-now" class="btn btn-white btn-animated">Book Now</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+</section>
+<section class="section section-lg bg-default">
+	<div class="container">
+		{% with whyChooseUs|first as first_item %}
+			<div class="row row-50 align-items-lg-center justify-content-lg-around">
+				<div class="col-md-6 col-lg-5">
+					<div class="box-images-parallax">
+						<div class="front-element" data-parallax-scroll="{&quot;y&quot;: -10,   &quot;smoothness&quot;: 30 }"><img src="{{ first_item.photo_1.url }}" alt="" width="387" height="440"/>
+						</div>
+						<div class="back-element" data-parallax-scroll="{&quot;y&quot;: 40,  &quot;smoothness&quot;: 30 }"><img src="{{ first_item.photo_2.url }}" alt="" width="287" height="380"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-5">
+					<h2 class="heading-decorate">Why Our Clients <br><span class="divider"></span>Choose Us
+					</h2>
+					<p class="big text-gray-800">{{ first_item.content }}</p>
+				</div>
+			</div>
+		{% endwith %}
+	</div>
+</section>
+<section class="section bg-gray-11">
+	<div class="row justify-content-center justify-content-lg-start no-gutters">
+		<div class="col-sm-12 col-lg-8 col-xl-7 col-xxl-6">
+			<div class="row no-gutters box-icon-classic-bordered justify-content-center">
+				{% for item in categories %}
+					<div class="col-sm-10 col-md-6">
+						<div class="box-icon-classic box-icon-classic-vertical">
+							<div class="icon-classic-aside">
+								<div class="icon-classic">
+									<img class="service-image" src="{{ item.photo.url }}" alt="service-image">
+								</div>
+								{% if item.name == "Nails Services" %}
+									<h4 class="icon-classic-title"><a href="{% url 'nail_services' %}">{{ item.name }}</a></h4>
+								{% elif item.name == "Tanning Services" %}
+									<h4 class="icon-classic-title"><a href="{% url 'tanning_services' %}">{{ item.name }}</a></h4>
+								{% endif %}
+							</div>
+							<div class="icon-classic-body">
+								<p>{{ item.description }}</p>
+							</div>
+							<div class="more-detail">
+								{% if item.name == "Nails Services" %}
+									<a href="{% url 'nail_services' %}" class="service-more-detail">More Detail</a>
+								{% elif item.name == "Tanning Services" %}
+									<a href="{% url 'tanning_services' %}" class="service-more-detail">More Detail</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-lg-4 col-xl-5 col-xxl-6">
+			{% with serviceBanner|first as first_item %}
+				<div class="block-img-aside">
+					<img src="{{ first_item.photo.url }}" alt="" width="974" height="350"/>
+				</div>
+			{% endwith%}
+		</div>
+	</div>
+</section>
+<section class="section parallax-container" data-parallax-img="{% static 'images/testimontial-parallax-6-1920x780.png' %}">
+	<div class="parallax-content section-lg text-center ">
+		<div class="container">
+			<h2>Testimonials</h2>
+			<div class="divider-lg"></div>
+			<!-- Owl Carousel-->
+			<div class="owl-carousel carousel-dark-dots" data-items="1" data-dots="true" data-nav="false" data-stage-padding="15" data-loop="true" data-autoplay="true" data-margin="30" data-mouse-drag="false">
+				{% for item in testimonials %}
+					<div class="quote-modern">
+						<div class="quote-modern-text">
+							<svg class="quote-body-mark" version="1.1" xmlns="https://www.w3.org/2000/svg" x="0px" y="0px" width="66px" height="49px" viewbox="0 0 66 49" enable-background="new 0 0 66 49" xml:space="preserve">
+								<g></g>
+								<path d="M36.903,49v-3.098c9.203-5.315,14.885-12.055,17.042-20.222c-2.335,1.524-4.459,2.288-6.37,2.288									c-3.186,0-5.875-1.29-8.071-3.876c-2.194-2.583-3.293-5.74-3.293-9.479c0-4.133,1.443-7.605,4.327-10.407									C43.425,1.405,46.973,0,51.185,0c4.213,0,7.735,1.784,10.566,5.352C64.585,8.919,66,13.359,66,18.669									c0,7.482-2.85,14.183-8.549,20.112C51.751,44.706,44.902,48.112,36.903,49z M0.69,49v-3.098									c9.205-5.315,14.887-12.055,17.044-20.222c-2.335,1.524-4.478,2.288-6.423,2.288c-3.152,0-5.823-1.29-8.02-3.876									C1.096,21.51,0,18.353,0,14.614c0-4.133,1.434-7.605,4.301-10.407C7.168,1.405,10.709,0,14.92,0c4.247,0,7.778,1.784,10.592,5.352									c2.814,3.567,4.223,8.007,4.223,13.317c0,7.482-2.843,14.183-8.524,20.112C15.53,44.706,8.69,48.112,0.69,49z"></path>
+							</svg>
+							<p>{{ item.message }}</p>
+						</div>
+						<div class="quote-modern-caption">
+							<h4 class="quote-modern-title">{{ item.client_name }}</h4>
+							<p class="big">Client</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section section-md bg-default text-center">
+	<div class="container">
+		<h2>Special Pricing</h2>
+		<div class="divider-lg"></div>
+		<p class="block-sm">We provide a wide variety of  affordable nail and skin treatments for you. Below you can learn more about the price range of our services.</p>
+		<div class="row justify-content-center">
+		<div class="col-sm-10 col-lg-12">
+			<div class="pricing-list-classic">
+				{% for item in specialPricing %}
+					<div class="pricing-classic-item">
+						<div class="pricing-classic-body">
+							<h4>{{ item.name }}</h4>
+							<p>{{ item.time_estimation }}</p>
+						</div>
+						<div class="price-value">
+							<h4>${{ item.price }}</h4>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section bg-gray-11">
+	<!-- {% include 'partials/_googleMap.html' %} -->
+	<div class="section-md" id="book-now">
+		<a href="book-now"></a>
+		<div class="section-appointment">
+				<h2>Make an Appointment</h2>
+				<div class="divider-lg"></div>
+				<p>Have any questions? Feel free to use the contact form below to get in touch with us. We will answer you as soon as possible!</p>
+				<div>
+					{% csrf_token %}
+					<div class="row row-20 justify-content-center" id="before-make-appointment">
+						<div class="col-lg-6">
+							<div class="form-wrap">
+								<input class="form-input" id="contact-name" type="text" name="name" placeholder="Your Name">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-wrap">
+								<input class="form-input" id="contact-email" type="email" name="email" placeholder="Your E-mail">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-wrap">
+								<input class="form-input" id="contact-phone" type="tel" name="phone" placeholder="Your Phone">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<button type="button" class="form-input" data-toggle="modal" data-target=".bd-example-modal-lg" id="choose-your-services">
+								Select your services
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade bd-example-modal-lg" id="services-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">Choose Your Services</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body">
+										<div class="row row-20 justify-content-center" id="service-container">
+											{% for item in categories %}
+												{% for key, value in subcategories.items %}
+													{% if key == item.name %}
+														<div class="col-12 col-md-12 col-lg-12 service-title">
+															<h4>{{ key }}</h4>
+															<div class="divider-lg"></div>
+														</div>
+														{% for item in value %}
+														<div class="col-6 col-lg-4 service-checkbox">
+															<div class="form-group form-check">
+																<input type="checkbox" class="form-check-input" id="checkbox-{{item.id}}" name="select-service">
+																<label class="form-check-label"
+																id="labelforcheckbox-{{item.id}}" for="checkbox-{{item.id}}">{{ item.name }}</label>
+															</div>
+														</div>
+														{% endfor %}
+													{% endif %}
+												{% endfor %}
+											{% endfor %}
+										</div>
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-wrap">
+								<!-- <input class="form-input" id="datepicker" name="date" type="text" placeholder="Date" /> -->
+								<input class="form-input" type="date" id="datepicker" value="2020-05-20" min="2020-05-01" max="2020-12-01">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-wrap">
+								<!-- <input class="form-input" id="timepicker" name="time" type="text" placeholder="Time" /> -->
+								<input class="form-input" type="time" id="timepicker" name="appt" value="11:00">
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-wrap">
+								<textarea class="form-input" id="contact-message" name="message" placeholder="Your comment"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="form-button group-sm text-center">
+						<button class="button button-primary" id="submit__btn" type="submit">make an appointment now</button>
+					</div>
+				</div>
+			</div>
+	</div>
+</section>
+{% include 'partials/_topfooter.html' %}
+{% endblock %}

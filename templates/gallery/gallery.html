@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Gallery {% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+	<div class="container">
+		<h1 class="page-title">Gallery</h1>
+	</div>
+</section>
+<section class="breadcrumbs-custom">
+	<div class="container">
+		<ul class="breadcrumbs-custom-path">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li class="active">Gallery</li>
+		</ul>
+	</div>
+</section>
+<section class="section section-lg bg-default text-center">
+	<div class="container">
+		<h2>Gallery </h2>
+		<div class="divider-lg"></div>
+		<p class="block-lg">Check out the full portfolio of our works including haircuts, custom makeup, exclusive manicure and pedicure, and more. All these works were performed by our skilled estheticians, manicurists, and cosmetologists.</p>
+	</div>
+	<div class="container-fluid">
+		<div class="row row-30">
+			<!-- Isotope Filters-->
+			<div class="col-lg-12">
+				<div class="isotope-filters isotope-filters-horizontal">
+					<button class="isotope-filters-toggle button button-sm button-primary" data-custom-toggle="#isotope-filters" data-custom-toggle-disable-on-blur="true">Filter<span class="caret"></span></button>
+					<ul class="isotope-filters-list" id="isotope-filters">
+						<li><a class="active" data-isotope-filter="*" data-isotope-group="gallery" href="#">All</a></li>
+						<li><a data-isotope-filter="Massage" data-isotope-group="gallery" href="#">Massage</a></li>
+						<li><a data-isotope-filter="Nails" data-isotope-group="gallery" href="#">Nails</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- Isotope Content-->
+			<div class="col-lg-12">
+				<div class="isotope row no-gutters row-condensed cobbles-gallery" data-isotope-layout="masonry" data-isotope-group="gallery" data-lightgallery="group" data-column-class=".col-sm-6.col-lg-4">
+					{% for object in gallery %}
+						<div class="col-sm-6 col-lg-4 isotope-item" data-filter="{{ object.type }}"><a class="gallery-item" data-lightgallery="item" href="{{ object.photo_original.url }}"><img src="{{ object.photo.url }}" alt="" width="384" height="450"/><span class="gallery-item-title"></span><span class="gallery-item-button"></span></a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Appointment {% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+	<div class="container">
+		<h1 class="page-title">Make an Appointment</h1>
+	</div>
+</section>
+<section class="breadcrumbs-custom">
+	<div class="container">
+		<ul class="breadcrumbs-custom-path">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li class="active">Make an Appointment</li>
+		</ul>
+	</div>
+</section>
+<section class="section section-lg bg-default text-center">
+	{% include 'partials/_alert.html' %}
+	<div class="container">
+		<h2>Make an Appointment</h2>
+		<div class="divider-lg"></div>
+		<p class="block-lg">The best way to enjoy a treatment at our salon is to book an appointment with the desired esthetician. Fill in the form below and we will contact you to discuss your appointment.</p>
+		<div class="row justify-content-center">
+			<div class="col-md-10 col-xl-8">
+				<!-- RD Mailform-->
+				{% csrf_token %}
+				<div class="row row-20 justify-content-center" id="before-make-appointment">
+					<div class="col-lg-6">
+						<div class="form-wrap">
+							<input class="form-input" id="contact-name" type="text" name="name" placeholder="Your Name">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-wrap">
+							<input class="form-input" id="contact-email" type="email" name="email" placeholder="Your E-mail*">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-wrap">
+							<input class="form-input" id="contact-phone" type="text" name="phone" placeholder="Your Phone">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<button type="button" class="form-input" data-toggle="modal" data-target=".bd-example-modal-lg" id="choose-your-services">
+							Select your services
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade bd-example-modal-lg" id="services-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">Choose your services</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+									<div class="row row-20 justify-content-center" id="service-container">
+										{% for item in categories %}
+											{% for key, value in subcategories.items %}
+												{% if key == item.name %}
+													<div class="col-lg-12">
+														<h4>{{ key }}</h4>
+														<div class="divider-lg"></div>
+													</div>
+													{% for item in value %}
+													<div class="col-6 col-lg-4 service-checkbox">
+														<div class="form-group form-check">
+															<input type="checkbox" class="form-check-input" id="checkbox-{{item.id}}" name="select-service">
+															<label class="form-check-label"
+															id="labelforcheckbox-{{item.id}}" for="checkbox-{{item.id}}">{{ item.name }}</label>
+														</div>
+													</div>
+													{% endfor %}
+												{% endif %}
+											{% endfor %}
+										{% endfor %}
+									</div>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-wrap"> 
+							<!-- <input class="form-input" id="datepicker" name="date" type="text" placeholder="Date" /> -->
+							<input class="form-input" type="date" id="datepicker" min="2020-01-01" max="2020-04-01">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-wrap"> 
+							<!-- <input class="form-input" id="timepicker" name="time" type="text" placeholder="Time" /> -->
+							<input class="form-input" type="time" id="timepicker" name="appt" value="11:00">
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-wrap">
+							<textarea class="form-input" id="contact-message" name="message" placeholder="Your comment"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="form-button group-sm text-center">
+					<button class="button button-primary" id="submit__btn" type="submit">make an appointment now</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

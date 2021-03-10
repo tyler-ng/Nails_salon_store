@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Nails Services{% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+	<div class="container">
+		<h1 class="page-title">Services</h1>
+	</div>
+</section>
+<section class="breadcrumbs-custom">
+	<div class="container">
+		<ul class="breadcrumbs-custom-path">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li><a href="#">Services</a></li>
+			<li class="active">Nails</li>
+		</ul>
+	</div>
+</section>
+<section class="section section-lg bg-gray-100 text-center">
+	<div class="container">
+		<h2>Nails Services</h2>
+		<div class="divider-lg"></div>
+		<div class="row icon-modern-list no-gutters">
+			{% for key, values in services.items %}
+	
+					<div class="col-sm-6 col-lg-4">
+						<article class="box-icon-modern modern-variant-2">
+							<div class="icon-modern">
+								{% for photo_key, photo in sub_cate_photos.items %}
+									{% if key == photo_key %}
+										<img class="service-image" src="{{ photo.url }}" alt="service-image">
+									{% endif %}
+								{% endfor %}
+							</div>
+							<h4 class="box-icon-modern-title service-title">{{ key }}</h4>
+							<div class="divider"></div>
+							<div class="row">
+								{% if key == "Artificial Nails" %}
+									<div class="col-4 col-ms-4 col-lg-4">
+									</div>
+									<div class="col-2 col-ms-2 col-lg-2">
+									</div>
+									<div class="col-6 col-ms-6 col-lg-6 service-price full-refill-title">
+										<ul>
+											<li>Full</li>
+											<li>Refill</li>
+										</ul>
+									</div>
+								{% endif %}
+								{% for object in values %}
+									{% if key == "Artificial Nails" %}
+										<div class="col-6 col-ms-6 col-lg-6 service-name">
+											{{ object.name }}
+										</div>
+										<div class="col-6 col-ms-6 col-lg-6 service-price full-refill-value">
+											<ul>
+												<li>${{ object.full }}</li>
+												<li>${{ object.refill }}</li>
+											</ul>
+										</div>
+									{% else %}
+										<div class="col-10 col-ms-10 col-lg-10 service-name">
+											{{ object.name }}
+										</div>
+										<div class="col-2 col-ms-2 col-lg-2 service-price">
+											${{ object.price }}
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</article>
+					</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div>
+        <form action="{% url 'appointments' %}" method="GET" data-form-output="form-output-global">
+            {% csrf_token %}
+            <div class="form-button group-sm text-center">
+                <button class="button button-primary" type="submit">make an appointment now</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

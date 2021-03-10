@@ -1,0 +1,19 @@
+<div>
+    <div id="map"></div>
+    
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Diva nails & tanning
+            var divaNail = {lat: 39.300724, lng: -77.829447};
+            // The map, centered at Diva nails & tanning
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 17, center: divaNail});
+            // The marker, positioned at Diva nails & tanning
+            var marker = new google.maps.Marker({position: divaNail, map: map});
+        }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWCx2bhJuHA6akWWQyiO8WCIyUZ4Pgr2k&callback=initMap">
+    </script>
+</div>

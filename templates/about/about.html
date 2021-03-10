@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | About Us {% endblock %}
+
+{% block content %}
+<section class="section-page-title">
+	<div class="container">
+		<h1 class="page-title">About Us</h1>
+	</div>
+</section>
+<section class="breadcrumbs-custom">
+	<div class="container">
+		<ul class="breadcrumbs-custom-path">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li class="active">About Us</li>
+		</ul>
+	</div>
+</section>
+<section class="section section-lg bg-default">
+	<div class="container">
+		<div class="row row-50 align-items-lg-center justify-content-xl-between">
+			<div class="col-lg-6">
+				<div class="block-xs">
+					<h2>Who We Are</h2>
+					<div class="divider-lg"></div>
+					<p class="big text-gray-800">{{ about.title }}</p>
+					<p>{{ about.content }}</p>
+				</div>
+				<div class="row row-30">
+					{% with shopInformation|first as first_item %}
+					<div class="col-md-6">
+						<div class="box-contact-info-with-icon"><span class="icon mdi mdi-clock icon-primary"></span>
+							<h5>Opening Hours</h5>
+							<ul class="list-xs">
+								<li> <span class="text-gray-800">Mon-Fri: </span> {{ first_item.open_hour_in_week_from }} – {{ first_item.open_hour_in_week_to }}
+								</li>
+								<li> <span class="text-gray-800">Saturday: </span> {{ first_item.open_hour_in_saturday_from }} – {{ first_item.open_hour_in_saturday_to }}
+								</li>
+								<li><span class="text-gray-800">Sunday: </span> {{ first_item.open_hour_in_sunday_from }} – {{ first_item.open_hour_in_sunday_to }}
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="box-contact-info-with-icon"><span class="icon mdi mdi-clock icon-primary"></span>
+							<h5>Our Location</h5>
+							<ul class="list-xs">
+								<li><span class="text-gray-800">Address: </span> {{ first_item.address }}
+								</li>
+								<li><span class="text-gray-800">Phone: </span> <a href="tel:+1 304-728-9989">{{ first_item.phone }}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					{% endwith %}
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="box-images box-images-variant-3">
+					<div class="box-images-item" data-parallax-scroll="{&quot;y&quot;: -20,   &quot;smoothness&quot;: 30 }"><img src="{{ about.photo_1.url }}" alt="" width="470" height="282"/>
+					</div>
+					<div class="box-images-item box-images-without-border" data-parallax-scroll="{&quot;y&quot;: 40,  &quot;smoothness&quot;: 30 }"><img src="{{ about.photo_2.url }}" alt="" width="470" height="282"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

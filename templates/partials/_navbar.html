@@ -1,0 +1,71 @@
+{% load static %}
+
+<div class="rd-navbar-main-outer">
+	<div class="rd-navbar-main">
+		<!-- RD Navbar Panel-->
+		<div class="rd-navbar-panel">
+			<!-- RD Navbar Toggle-->
+			<button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+			<!-- RD Navbar Brand-->
+			<div class="rd-navbar-brand"><a class="brand" href="{% url 'home' %}"><img src="{% static 'images/diva-logo-646x270.png' %}" alt=""/></a></div>
+		</div>
+		<div class="rd-navbar-main-element">
+			<div class="rd-navbar-nav-wrap">
+				<!-- RD Navbar Nav-->
+				<ul class="rd-navbar-nav">
+					<li 
+						{% if '/' == request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					>
+						<a class="rd-nav-link" href="{% url 'home' %}">Home</a>
+					</li>
+					<li 
+						{% if '/about' == request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					><a class="rd-nav-link" href="{% url 'about' %}">About</a>
+					</li>
+					<li 
+						{% if 'nail' in request.path or 'massage' in request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					><a class="rd-nav-link" href="#">Services</a>
+						<ul class="rd-menu rd-navbar-dropdown">
+							<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{% url 'nail_services' %}">Nail Services</a></li>
+							<li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{% url 'tanning_services' %}">Tanning Services</a></li>
+						</ul>
+					</li>
+					<li 
+						{% if '/gallery' == request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					><a class="rd-nav-link" href="{% url 'gallery' %}">Gallery</a>
+					</li>
+					<li {% if '/appointments' == request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					><a class="rd-nav-link" href="{% url 'appointments' %}">Appointment</a>
+					</li>
+					<li {% if '/contact' == request.path %}
+							class="rd-nav-item active"
+						{% else %}
+							class="rd-nav-item"
+						{% endif %}
+					><a class="rd-nav-link" href="{% url 'contact' %}">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

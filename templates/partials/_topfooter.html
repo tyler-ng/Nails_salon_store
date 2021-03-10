@@ -1,0 +1,37 @@
+<footer class="section bg-default section-sm footer-modern">
+  <div class="container">
+    {% with shopInformation|first as first_item %}
+      <div class="row row-50">
+        <div class="col-sm-6 col-lg-3">
+          <p class="footer-title">About Us</p>
+          <div class="divider-lg"></div>
+          <p>{{ first_item.about_us }}</p>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <p class="footer-title">Opening Hours</p>
+          <div class="divider-lg"></div>
+          <ul class="list">
+            <li>Mon-Fri: {{ first_item.open_hour_in_week_from }} – {{ first_item.open_hour_in_week_to }}</li>
+            <li>Saturday: {{ first_item.open_hour_in_saturday_from }} – {{ first_item.open_hour_in_saturday_to }}</li>
+            <li>Sunday: {{ first_item.open_hour_in_sunday_from }} – {{ first_item.open_hour_in_sunday_to }}</li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <p class="footer-title">Contact Information</p>
+          <div class="divider-lg"></div>
+          <ul class="footer-contact-info">
+            <li><span class="icon mdi mdi-map-marker icon-primary"></span><a href="#">{{ first_item.address }} </a></li>
+            <li><span class="icon mdi mdi-phone icon-primary"></span><a href="tel:519-622-1234">{{ first_item.phone }}</a></li>
+            <li><span class="icon mdi mdi-email-outline icon-primary"></span><a href="mailto:#">{{ first_item.email }}</a></li>   
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <!-- Embed Facebook page-->
+          <div class="fb-page" data-href="https://www.facebook.com/Diva-Nails-Tanning-Charles-Town-238702783262282/?ref=search&amp;__tn__=%2Cd%2CP-R&amp;eid=ARDSEu8zoTi5E9QLktr9oYRmlJani-l-qxn1K-8vsCuFx9vIUnkU9Bru-kFa_fyY32x8uMht82lExidG" data-tabs="timeline" data-width="340" data-height="170" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Diva-Nails-Tanning-Charles-Town-238702783262282/?ref=search&amp;__tn__=%2Cd%2CP-R&amp;eid=ARDSEu8zoTi5E9QLktr9oYRmlJani-l-qxn1K-8vsCuFx9vIUnkU9Bru-kFa_fyY32x8uMht82lExidG" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Diva-Nails-Tanning-Charles-Town-238702783262282/?ref=search&amp;__tn__=%2Cd%2CP-R&amp;eid=ARDSEu8zoTi5E9QLktr9oYRmlJani-l-qxn1K-8vsCuFx9vIUnkU9Bru-kFa_fyY32x8uMht82lExidG">Diva Nails &amp; Tanning Charles Town</a></blockquote></div>
+        </div>
+
+
+      </div>
+    {% endwith %}
+  </div>
+</footer>

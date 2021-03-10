@@ -1,0 +1,29 @@
+<div class="rd-navbar-aside-outer rd-navbar-collapse">
+	<div class="rd-navbar-aside">
+		<div class="header-info">
+			{% with shopInformation|first as first_item %}
+			<ul class="list-inline list-inline-md">
+				<li>
+					<div class="unit unit-spacing-xs align-items-center">
+						<div class="unit-left font-weight-bold">Call:</div>
+						<div class="unit-body"><a href="tel:+1 304-728-9989">{{ first_item.phone }}</a></div>
+					</div>
+				</li>
+				<li>
+					<div class="unit unit-spacing-xs align-items-center">
+						<div class="unit-left font-weight-bold">Opening Hours: </div>
+						<div class="unit-body"> Mn-Fr: {{ first_item.open_hour_in_week_from }} – {{ first_item.open_hour_in_week_to }}</div>
+						<div class="unit-body"> Saturday: {{ first_item.open_hour_in_saturday_from }} – {{ first_item.open_hour_in_saturday_to }}</div>
+						<div class="unit-body"> Sunday: {{ first_item.open_hour_in_sunday_from }} – {{ first_item.open_hour_in_sunday_to }}</div>
+					</div>
+				</li>
+			</ul>
+			{% endwith %}
+		</div>
+		<div class="social-block">
+			<ul class="list-inline">
+				<li><a class="icon fa-facebook" href="https://www.facebook.com/Diva-Nails-Tanning-Charles-Town-238702783262282/"></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
